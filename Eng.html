@@ -134,45 +134,15 @@
         <br/>
         <form id="QandA">
             <div id="Q"></div>
-            <input type="text" id="ans" style="width:162px;height:20px"/>
-            <button type="submit" id="sub">Summit</button>
+            <input type="text" id="ans" style="width:162px;height:20px" place-holder="start"/>
+            <button type="submit" onclick="
+                let q=randli[Math.floor(Math.random()*randli.length)];
+                let ask=Q[q]
+                if(document.getElementById('ans')==='start'){
+                    document.getElementById('Q').innerText=Qnum+". "+ask
+                ">Submit</button>
         </form>
         <script>
-            while(randli.length>0){
-                let q=randli[Math.floor(Math.random()*randli.length)];
-                let ask=Q[q];
-                if(typeof ask==="string"){
-                    Qnum+=1;
-                    document.getElementById("Q").innerText=Qnum+". "+ask;
-                    document.getElementById("QandA").addEventListener("submit", function(event){
-                        event.preventDefault();
-                        let reply=document.getElementById("ans").value;
-                        if(reply===q){
-                            alert("T");
-                            score+=1;
-                            randli=randli.filter(item=>item !==q);
-                            } else {alert("F")
-                        }});
-                        }else {let temp=ask;
-                             let temp_score=0;
-                             for(let i=0; i<temp.length; i++){
-                             ask=temp[i];
-                             document.getElementById("Q").innerText=Qnum+". "+ask;
-                             document.getElementById("QandA").addEventListener("submit", function(event){
-                             event.preventDefault();
-                             let reply=document.getElementById("ans").value;
-                             if(reply===q[i]){
-                                 alert(`T${i+1}/${temp.length}`);
-                                 temp_score+=0.5;} else{temp_score=0;
-                                     alert("F");}
-                         if(temp_score===0){alert("F");} else{score+=temp_score;
-                              randli=randli.filter(item=>item !=q);
-                              temp_score=0;
-                         }
-                    });
-               }
-            }
-        }
             document.getElementById("Q").innerText=`score:${score}/${total}`
         </script>
     </body>
