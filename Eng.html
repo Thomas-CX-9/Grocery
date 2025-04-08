@@ -152,7 +152,8 @@
                 }
                 end();
             }
-            function checkAns(){
+            function checkAns(event){
+                event.preventDefault();
                 ans=document.getElementById("ans").value;
                 if (typeof Q[q] ==="string"){
                     if (ans===Q[q]){
@@ -190,13 +191,15 @@
             <div id="Q"></div>
             <input type="text" id="ans" style="width:162px;height:20px"/>
             <!-- missing -->
-            <button type="submit" onclick="checkAns();">Submit</button>
+            <button type="submit" id="submit" onclick="checkAns();">Submit</button>
         </form>
         <script>
             //end
             function end(){
                 if (randli.length==0){
                 document.getElementById("Q").innerText=`score:${score}/${total}`;
+                document.getElementById("ans").disabled=true;
+                document.getElementById("submit").disabled=true;
                 }
             }
         </script>
