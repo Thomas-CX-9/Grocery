@@ -151,8 +151,8 @@
                             alert("T");
                             score+=1;
                             randli=randli.filter(item=>item !==q);
-                            } else {break;}
-                        });
+                            } else {alert("F")
+                        }});
                         }else {let temp=ask;
                              let temp_score=0;
                              for(let i=0; i<temp.length; i++){
@@ -164,16 +164,16 @@
                              if(reply===q[i]){
                                  alert(`T${i+1}/${temp.length}`);
                                  temp_score+=0.5;} else{temp_score=0;
-                                     break;}
-                         if(temp_score===0){break;} else{score+=temp_score;
+                                     alert("F");}
+                         if(temp_score===0){alert("F");} else{score+=temp_score;
                               randli=randli.filter(item=>item !=q);
                               temp_score=0;
                          }
                     });
                }
+            }
+        }
             document.getElementById("Q").innerText=`score:${score}/${total}`
         </script>
     </body>
 </html>
-      
-    
