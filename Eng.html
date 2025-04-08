@@ -1,16 +1,174 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        button{
+            width:323px;
+            height:200px;
+            background-color:green;
+            border-radius:100px;
+            border-style:none;
+            color:white;
+        }
+    </style>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>English U5/6 vocab and phrases</title>
     </head>
     <body>
-        //dict
-        
-        //code
+        <script>
+            //keys
+            const k_tedious=["tedious","adj"];
+            const k_typcoon=["typcoon","n"];
+            const k_agile=["agile","adj"];
+            const k_indignantly=["indignantly","adv"];
+            const k_confront=["confront","v"];
+            const k_affection=["affection","n"];
+            const k_persuade=["persuade","v"];
+            const k_contently=["contently","adv"];
+            const k_radically=["radically","adv"];
+            const k_hinder=["hinder","v"];
+            const k_unprecedented=["unprecedented","adj"];
+            const k_concern=["concern","n"];
+            const k_incessant=["incessant","adj"];
+            const k_accomplish=["accomplish","v"];
+            const k_exterminate=["exterminate","v"];
+            const k_outlandish=["outlandish","adj"];
+            const k_marine=["marine","adj"];
+            const k_vibrantly=["vibrantly","adv"];
+            const k_starve=["starve","v"];
+            const k_trigger=["trigger","v"];
+            const k_vulnerable=["vulnerable","adj"];
+            const k_restore=["restore","v"];
+            const k_species=["species","n"];
+            const k_lament=["lament","v"];
+            const k_complicated=["complicated","adj"];
+            const k_equivalent=["equivalent","adj"];
+            const k_drift=["drift","v"];
+            const k_rapidly=["rapidly","adv"];
+            const k_repurpose=["repurpose","v"];
+            const k_reliance=["reliance","n"];
+            const k_permeate=["permeate","v"];
+            const k_gravity=["gravity","n"];
+            //dict
+            const Q={
+            //Unit5 Text1
+            "let alone":"People didn't even use video calls any more, ___ ___ paper and pen",
+            "It turns out that":"__ __ __ __ the piece of paper had been found on the pavement in front of a house owned by Nicholas King, the richest man in Roseshire.",
+            "Thanks to":"__ __ robotics engineering, humans no longer had to perform dangerous or tedious tasks in 2050.",
+            "give away":"He didn't want to __ __ more than he had to.",
+            "lose marbles":"Lane wondered if the 90-year-old tycoon had finally __ his __, even though better diets and medical care had redefined the concept of aging.",
+            "smell a rat":"'I __ __ __,'King said uneasily",
+            "watch over":"Who will be __ __ me while you're waiting for the results?",
+            "What's even better":"__ __ __, electric cars and planes have made the world a greener place.",
+            k_tedious:["1. boring, not interesting","2. POS"],
+            k_typcoon:["1. a person who has succeeded in business or industry and has become","2. POS"],
+            k_agile:["1. able to move your body quickly and easily","2. POS"],
+            k_indignantly:["1. in an angry way, because of sth that is wrong or not fair","2. POS"],
+            k_confront:["1. to face, meet, or deal with a difficult situation or person","2. POS"],
+            k_affection:["1. a feeling of liking for a person or place","2. POS"],
+            k_persuade:["1. to make sb do something by giving them good reasons for doing it","2. POS"],
+            k_contently:["1. show content or satisfication","2. POS"],
+            //Unit 5 Text2
+            "at one's fingertips":"Boundaries between virtual and physical worlds are blurred by digital experiences such as augmented reality; and instant access to infinite knowledge is __ __ __.",
+            "drift apart":"People will eventually __ __ because they no longer share any real-life experiences together.",
+            "take over":"Social networking is also __ __ real-life social interactions, which are essential for developing empathy, understanding body language and learning about 15 taking turns in conversations.",
+            "distract from":"Incessant incoming messages and notifications __ us __ more important things in life.",
+            "take a toll on":"Leading a tech-dominated life is also __ __ __ __ our health.",
+            "result from":"Mindy's 'text claw, __ __ prolonge periods of time curling her fingers around he smartphone, is unsettling.",
+            "get on":"technology should do the hard work so that you can __ __ and live your life!",
+            k_radically:["1. completely or extremely","2. POS"],
+            k_hinder:["1. to limit the ability of sb to do sth, or to limit the development of sth","2. POS"],
+            k_unprecedented:["1. never having happened or existed in the past","2. POS"],
+            k_concern:["1. a worried or nervous feeling about sth","2. POS"],
+            k_incessant:["1. never stopping especially in an annoying or unpleasant way","2. POS"],
+            k_accomplish:["1. to finish something","2. POS"],
+            k_exterminate:["1. to kill or destory sb/sth completely","2. POS"],
+            k_outlandish:["1. strange and unusual and difficult to accept or like","2. POS"],
+            //Unit6 Text1
+            "teem with":"Once vibrantly coloured and __ __ life, many coral reefs around the world now line the shorelines as lifeless skeletons.",
+            "made up of":"Coral reefs are __ __ __ hundreds and sometimes thousands of tiny colourless creatures called polyps.",
+            "bring about":"However, overfishing, pollution from household waste and rising sea temperatures __ __ by global warming are putting the corals under great stress.",
+            "the tip of the iceberg":"Unfortunately, the loss of colour in coral reefs is just __ __ __ __ __.",
+            "give a boost":"Scientists experimenting with different methods to __ coral reefs __ much needed __.",
+            "without its risk":"However, interfering with nature isn't __ __ __.",
+            "serve no purpose":"It __ __ __ to regretfully lament I wish we had done more to save the coral reefs' when they're all dead and gone.",
+            k_marine:["1. related to the sea","2. POS"],
+            k_vibrantly:["1. in a way that is full of enthusiasm","2. POS"],
+            k_starve:["1. to (cause someone to) become very weak or die because there is no enough food to eat","2. POS"],
+            k_trigger:["1. to cause something to start","2. POS"],
+            k_vulnerable:["1. able to be easily physically, emotionally, or mentally hurt, influenced, or attacked","2. POS"],
+            k_restore:["1. to return something to an good condition or position","2. POS"],
+            k_species:["1. a set of animals or plants in which the members have similar characteristics to each other","2. POS"],
+            k_lament:["1. to express sadness and feeling sorry about something","2. POS"],
+            //Unit6 Text2
+            "entangled in":"Many marine creatures, such as whales, turtles and seabirds, have died from ingesting pieces of plastic or getting __ __ abandoned fishing nets.",
+            "every corner of the planet":"Microplastics can already be found in __ __ __ __ __, from the highest summit to the deepest oceans.",
+            "wean from":"Environmentalists and scientists around the world are also experimenting with a variety of other solutions to __ us __ our plastic reliance.",
+            "remain to be seen":"Whether the SoluBag will help the Earth reclaim some of its clean water sources lost to plastic waste __ __ __ __.",
+            "make an effort to":"The fashion industry is __ __ __ __ reduce plastic waste as well.",
+            "branch out into":"So far, Rothy's have repurposed around 12 million water bottles and have begun __ __ __ other sustainable fashion accessories.",
+            "derive from":"Elsewhere, Australian company Team Timbuktu is producing activewear out of a new fabric __ __ recycled plastic bottles.",
+            k_complicated:["1. involving a lot of different parts, in a way that is difficult to understand","2. POS"],
+            k_equivalent:["1. having the same amount, value, purpose, qualities, etc.","2. POS"],
+            k_drift:["1. to move slowly, especially as a result of outside force, with no control over direction","2. POS"],
+            k_rapidly:["1. in a fast way","2. POS"],
+            k_reliance:["1. the state of dependent on something or someone","2. POS"],
+            k_repurpose:["1. to find a new use for an idea, product, or building","2. POS"],
+            k_permeate:["1. to spread through something and be present in every part of it","2. POS"],
+            k_gravity:["1. seriousness","2. POS"]
+            };
+            //random list
+            const randli=[k_tedious,k_typcoon,k_agile,k_indignantly,k_confront,
+            k_affection,k_persuade,k_contently,k_radically,k_hinder,k_unprecedented,
+            k_concern,k_incessant,k_accomplish,k_exterminate,k_outlandish,k_marine,
+            k_vibrantly,k_starve,k_trigger,k_vulnerable,k_restore,k_species,k_lament,
+            k_complicated,k_equivalent,k_drift,k_rapidly,k_repurpose,k_reliance,
+            k_permeate,k_gravity];
+            let Qnum=0
+            let score=0
+            let total=randli.length
+        </script>
+        <!-- html -->
         <h1>English U5/6 vocab and phrases</h1>
         <br/>
         <form id="QandA">
-            
+            <div id="Q"></div>
+            <input type="text" id="ans" style="width:162px;height:100px"/>
+            <button type="submit" id="sub">Summit</button>
+        </form>
+        <script>
+            while(randli!==[]){
+                let q=randli[Math.random()*randli.length];
+                let ask=Q[q];
+                if(typeof ask==="string"){
+                    Qnum+=1;
+                    document.getElementById("Q").innerText=Qnum+". "+ask;
+                    document.getElementById("QandA").addEventListener("submit", function(event){
+                        event.preventDefault();
+                        let reply=document.getElementById("ans").value;
+                        if(reply===q){
+                            document.write("T");
+                            score+=1;
+                            randli=randli.filter(item=>item !=q);
+                            } else {break;}
+                   });} else {let temp=ask;
+                    let temp_score=0;
+                    for(let i=0; i<temp.length; i++){
+                        ask=temp[i];
+                        document.getElementById("Q").innerText=Qnum+". "+ask;
+                        document.getElementById("QandA").addEventListener("submit", function(event){
+                        event.preventDefault();
+                        let reply=document.getElementById("ans").value;
+                        if(reply===q[i]){
+                            document.write(`T${i+1}/${temp.length}`);
+                            temp_score+=0.5;} else{temp_score=0;
+                                break;}
+                    if(temp_score===0){break;} else{score+=temp_score;
+                         randli=randli.filter(item=>item !=q);}});}
+            document.getElementById("Q").innerText=`score:${score}/${total}`
+        </script>
+    </body>
+</html>
+      
     
