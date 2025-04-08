@@ -119,31 +119,86 @@
             k_gravity:["1. seriousness","2. POS"]
             };
             //random list
-            const randli=[k_tedious,k_typcoon,k_agile,k_indignantly,k_confront,
+            let randli=[k_tedious,k_typcoon,k_agile,k_indignantly,k_confront,
             k_affection,k_persuade,k_contently,k_radically,k_hinder,k_unprecedented,
             k_concern,k_incessant,k_accomplish,k_exterminate,k_outlandish,k_marine,
             k_vibrantly,k_starve,k_trigger,k_vulnerable,k_restore,k_species,k_lament,
             k_complicated,k_equivalent,k_drift,k_rapidly,k_repurpose,k_reliance,
             k_permeate,k_gravity];
-            let Qnum=0
-            let score=0
-            let total=randli.length
+            let Qnum=0;
+            let score=0;
+            let total=randli.length;
+            let q=0;
+            let ans="";
+            let i=0;
+            let num=0;
+            /*                   */
+            /*    separation     */
+            /*                   */
+            //function for showing Question
+            function showQ(){
+                if (i===0){
+                num=Math.floor(Math.random()*randli.length)
+                q=randli[num];
+                }
+                if (typeof Q[q] ==="string"){
+                    Qnum++;
+                    document.getElementById("Q").innerText=Qnum+". "+Q[q];
+                }else{
+                    document.getElementById("Q").innerText=Qnum+". "+Q[q][i];
+                    if (i==2){
+                        i=0;
+                    }
+                }
+                end();
+            }
+            function checkAns(){
+                ans=document.getElementById("ans").value;
+                if (typeof Q[q] ==="string"){
+                    if (ans===Q[q]){
+                        alert("T");
+                        score++;
+                    }else{
+                        alert("F");
+                    }
+                    randli.splice(num,1);
+                }else{
+                    if (ans===Q[q][i]){
+                        alert(`T(${i}/${Q[q].length}`);
+                        score+=0.5;
+                        i++;
+                        if (i==2){
+                            randli.splice(num,1);
+                            i=0;
+                        }
+                    }else{
+                        alert("F");
+                        i=0;
+                        randli.splice(num,1);
+                    }
+                }
+                document.getElementById("ans").value="";
+                showQ();
+            }
+            showQ();
         </script>
         <!-- html -->
         <h1>English U5/6 vocab and phrases</h1>
         <br/>
         <form id="QandA">
+            <!-- Question -->
             <div id="Q"></div>
-            <input type="text" id="ans" style="width:162px;height:20px" place-holder="start"/>
-            <button type="submit" onclick="
-                let q=randli[Math.floor(Math.random()*randli.length)];
-                let ask=Q[q]
-                if(document.getElementById('ans')==='start'){
-                    document.getElementById('Q').innerText=Qnum+". "+ask
-                ">Submit</button>
+            <input type="text" id="ans" style="width:162px;height:20px"/>
+            <!-- missing -->
+            <button type="submit" onclick="checkAns();">Submit</button>
         </form>
         <script>
-            document.getElementById("Q").innerText=`score:${score}/${total}`
+            //end
+            function end(){
+                if (randli.length==0){
+                document.getElementById("Q").innerText=`score:${score}/${total}`;
+                }
+            }
         </script>
     </body>
 </html>
