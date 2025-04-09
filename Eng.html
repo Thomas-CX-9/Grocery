@@ -181,7 +181,6 @@
                 document.getElementById("ans").value="";
                 showQ();
             }
-            showQ();
         </script>
         <!-- html -->
         <h1>English U5/6 vocab and phrases</h1>
@@ -192,6 +191,9 @@
             <input type="text" id="ans" style="width:162px;height:20px"/>
             <!-- missing -->
             <button type="submit" id="submit" onclick="checkAns();">Submit</button>
+            <button id="start" onclick="
+                showQ();
+                getElementById("start").remove();">Start</button>
         </form>
         <script>
             //end
