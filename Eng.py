@@ -1,4 +1,4 @@
-from random import randint
+from random import randint,choice
 from os import system
 from time import sleep, time
 system("clear")
@@ -93,7 +93,7 @@ q={
 'be comprised of':'Residents are comprised of equal numbers of the youth and the elderly, and they often mingle in the community\'s \'togetherness lounges\' that encourage social interaction.',
 ('appalled','adj'):['1. having strong feeling of shock or disapproval.','2. POS'],
 ('circumstance','n'):['1. a fact or event that makes a situation the wat it is.','2. POS'],
-('grave','adj'):['1. seriously bad','2. POS],
+('grave','adj'):['1. seriously bad','2. POS'],
 ('combat','v'):['1. to try to stop sth unpleasant or harmful from happening and increasing.','2. POS'],
 ('marginalized','adj'):['1. sb or sth being treated or viewed as if they are not important.','2. POS'],
 ('mingle','v'):['1. to mive around and talk to other people at social event','2. POS'],
@@ -203,48 +203,54 @@ keys=[
 ]
 num=list(range(len(keys)))
 score=0
-st=time()
+ti=time()
 dt=0
 Qnum=1
 while num!=[]:
-    randnum=num[randint(0,len(num)-1)]
-    ask=q[keys[randnum]]
+    qKey=choice(keys)
+    ask=q[qKey]
     if isinstance(ask, list):
         temp=ask
         temp_score=0
         for i in range(len(ask)):
             ask=temp[i]
             ans=input(str(Qnum)+". "+ask+"\n")
-            if ans==keys[randnum][i]:
+            if ans==qKey[i]:
                 print(f"T({i+1}/{len(temp)})")
                 temp_score+=0.5
                 sleep(1)
                 dt+=1
-                system("clear")
+                try:
+                    system("clear")
+                except:
+                    system('cls')
             else:
                 temp_score=0
-                print(keys[randnum][i])
+                print(qKey[i])
                 break
         if temp_score==0:
             break
         else:
             score+=temp_score
             temp_score=0
-            num.remove(randnum)
+            keys.remove(qKey)
             Qnum+=1
     else:
         ans=input(str(Qnum)+". "+ask+"\n")
-        if ans==keys[randnum]:
+        if ans==qKey:
                 print("T")
-                num.remove(randnum)
+                keys.remove(qKey)
                 score+=1
                 sleep(1)
                 dt+=1
-                system("clear")
+                try:
+                    system("clear")
+                except:
+                    system('cls')
                 Qnum+=1
         else:
-            print(keys[randnum])
+            print(qKey)
             break
 print(f"ended, score:{int(score)}/{len(keys)}")
-dt+=time()-st
+dt+=time()-ti
 print(f"{dt}({int(dt//60)}:{round(dt%60)})")
