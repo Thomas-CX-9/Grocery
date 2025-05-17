@@ -85,7 +85,7 @@ q={
 ('overwhelming','adj'):['1. difficult to flight and against.','2. POS'],
 ('concrete','adj'):['1. clear and certain, or real and existing in a form that can be seen or felt.','2. POS'],
 #Unit7 Text2
-'beyond control':'Loneliness is a very real social issue, often caused by a variety of circumstances that are ______ a person's _______.',
+'beyond control':'Loneliness is a very real social issue, often caused by a variety of circumstances that are ______ a person\'s _______.',
 ('pose a risk','pose risks'):['1. ublic health experts globally say loneliness ______ _ serious health __.','2. pural form'],
 'hold firm to':'Unfortunately, despite these findings and expert pinions, many, including Mr Tam, ____ ____ __ the long-standing belief.',
 'equate to':'Thought Mr Tam\'s statement that some people enjoy being alone is accurate, he incorrecty _______ \'being alone\' __ \'being lonely\'.',
