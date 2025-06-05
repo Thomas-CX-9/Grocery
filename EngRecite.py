@@ -1,3 +1,4 @@
+from os import _exit
 ans=[
 #U5 T1#
 "let alone",
@@ -102,6 +103,8 @@ score=len(ans)
 for i in ans:
     num=ans.index(i)+1
     inp=input(f'{num}. ')
+    if in == 'exit':
+        _exit(0)
     if inp != i:
         print('Wrong')
         score-=1
