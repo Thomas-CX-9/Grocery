@@ -117,16 +117,20 @@ sub2_Qkey=''
 sub2_Qans=''
 score=0
 def check(ans,storey):
-    global sub2_Qans,sub1_Qans,Qans
-    if storey==0:
+    global sub2_Qans,sub1_Qans,Qans,Qkey
+    if len(Qkey)==4:
         if ans==Qans:
-            return True
-    elif storey==1:
-        if ans==sub1_Qans:
-            return True
+            return 1
     else:
-        if ans==sub2_Qans:
-            return True
+        if storey==0:
+            if fuzz.ratio(ans,Qans)>=0.5:
+                return 1
+        elif storey==1:
+            if fuzz.ratio(ans,sub1_Qans)>=0.5:
+                return 1
+        else:
+            if fuzz.ratio(ans,sub2_Qans)>=0.5:
+                return 1
     return False
 while 1:
     Qkey=choice(keys)
