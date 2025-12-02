@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guide</title>
+        <meta charset="UFT-8">
+    </head>
+    <style>
+        #control-rack{
+            position: absolute;
+            text-align: center;;
+            bottom: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2000px;
+        }
+        .control-button{
+            position: relative;
+            height: 100px;
+            width: 500px;
+            border-radius: 50px;
+            border: none;
+            margin-left: 200px;
+            margin-right: 200px;
+            font-size: 50px;
+            text-justify: center;
+            bottom: 0px;
+            cursor: pointer;
+        }
+        .control-button:hover{
+            bottom: 10px;
+            transition: bottom 0.6s ease;
+        }
+        #quit{
+            color: white;
+            background-color: red;
+        }
+        #continue{
+            color: purple;
+            background-color: yellow;
+        }
+        #dialog{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 150px;
+            text-align: center;
+        }
+    </style>
+    <body>
+        <p id="dialog"></p>
+        <div id="control-rack">
+            <span><button class="control-button" id="quit" onclick="quit();">退出遊戲</button></span>
+            <span><button class="control-button" id="continue" onclick="clickingContinue();">繼續</button></span>
+        </div>
+        <script>
+            let contentOfDialog = '歡迎進入長征計畫訓練營。你是一位被選中的航天新人，需要通過四級知識考核才能參與中國核心航天任務。準備好，知識就是你的燃料！';
+            const lengthOfContentOfDialog = contentOfDialog.length;
+            const dialog = document.getElementById('dialog');
+            let i = 0;
+            let blinkinterval = 100; // ms
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            async function typeDialog(){
+                for (i = 0; i < lengthOfContentOfDialog; i++){
+                    let blinkTimes = Math.round(Math.random() * 3);
+                    for (let t = 0; t < blinkTimes; t++){
+                        dialog.innerHTML += '|';
+                        await sleep(blinkinterval);
+                        dialog.innerHTML = dialog.innerHTML.replace('|', '');
+                        await sleep(blinkinterval);
+                    }
+                    dialog.innerHTML += contentOfDialog[i] + '|';
+                    dialog.innerHTML = dialog.innerHTML.replace('|', '');
+                }
+            }
+            function Coninue(){
+                window.location.href = 'question.html';
+            }
+            function quit(){
+                window.location.href = 'mainPage.html';
+            }
+            function clickingContinue(){
+                if (i == 0){
+                    typeDialog();
+                } else {
+                    Coninue();
+                }
+            }
+        </script>
+    </body>
+</html>
