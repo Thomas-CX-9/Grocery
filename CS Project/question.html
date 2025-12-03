@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Question</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="controlButton.css">
+    </head>
+    <style>
+        #level{
+            text-align: center;
+            font-size: 40px;
+            margin-top: 100px;
+        }
+        #dialog{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 150px;
+            text-justify: center;
+            font-size: 30px;
+        }
+        #question-card{
+            top: 400px;
+        }
+        #choices-rack{
+            display: flex; 
+            justify-content: space-evenly;
+            margin: 100px;
+        }
+        .choices{
+            font-size: 40px;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 2px solid rgb(50, 50, 50);
+            cursor: pointer;
+        }
+    </style>
+    <body>
+        <h1 id="level"></h1>
+        <p id="dialog"></p>
+        <div id="control-rack">
+            <button class="control-button" id="quit" onclick="quit();">退出遊戲</button>
+            <span><button class="control-button" id="continue" onclick="clickingContinue();">繼續</button></span>
+        </div> 
+        <div id='question-card'></div>
+        <script src="questioning.js"></script>
+        <script src="controller.js"></script> 
+        <script>
+            let i = 0;
+            let level = 1;
+            let questionKey;
+            let questionCardHTML = '';
+            const contentOfDialogOfLV1 = '新兵，先來點簡單的基礎題，證明你不是誤闖的！';
+            const contentOfDialogOfLV2 = '基礎知識通過！你獲得了進入神舟中心的許可權。接下來的任務是確保載人飛船與空間站的完美對接，考驗你對核心技術的理解！';
+            const contentOfDialogOfLV3 = '很好，你對載人航天體系已經掌握！現在我們進入嫦娥工程，目標是月球和深空。回答這些關於補給與探測的題目！';
+            const contentOfDialogOfLV4 = '離成功只有一步之遙！最終關卡是空間站和未來技術。回答這些關於重型發射和深空探測的難題，你就能成為正式的航天專家！';
+            const body = document.body;
+            const title = document.getElementById('level');
+            let contentOfDialog;
+            const levelTitles = ['🌟 第一級：新兵報到（簡單）',];
+            let questionNum = 0;
+            let lengthOfContentOfDialog;
+            let is_answered = true;
+            let plot_passed = false;
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            function setDialog(){
+                title. innerHTML = levelTitles[level - 1];
+                switch(level){
+                    case 1:
+                        contentOfDialog = contentOfDialogOfLV1;
+                        break;
+                    case 2:
+                        contentOfDialog = contentOfDialogOfLV2;
+                        break;
+                    case 3:
+                        contentOfDialog = contentOfDialogOfLV3;
+                        break;
+                    case 4:
+                        contentOfDialog = contentOfDialogOfLV4;
+                        break;
+                    default:
+                        contentOfDialog = '你的表現令人印象深刻，新兵。你已經證明了自己對中國航天事業的深刻理解。長征火箭已經準備就緒，現在，準備好迎接你的第一次發射任務，去征服星辰大海吧！';
+                        break;
+                }
+                lengthOfContentOfDialog = contentOfDialog.length;
+            }
+            async function typeDialog(){
+                setDialog();
+                const blinkinterval = 100; 
+                for (i = 0; i < lengthOfContentOfDialog; i++){
+                    let blinkTimes = Math.round(Math.random() * 3);
+                    for (let t = 0; t < blinkTimes; t++){
+                        dialog.innerHTML += '|';
+                        await sleep(blinkinterval);
+                        dialog.innerHTML = dialog.innerHTML.replace('|', '');
+                        await sleep(blinkinterval);
+                    }
+                    dialog.innerHTML += contentOfDialog[i] + '|';
+                    dialog.innerHTML = dialog.innerHTML.replace('|', '');
+                }
+            }
+            function generateQuestionCard(questionKey){
+                let symbols = ['A', 'B', 'C', 'D'];
+                let options;
+                let choices = {};
+                console.log(questionCardHTML);
+                const questionCard = document.getElementById('question-card');
+                questionCard.innerHTML = ``;
+                shuttleArray(symbols);
+                switch(level){
+                    case 1:
+                        options = questionsOfLV1[questionKey].incorrect;
+                        options.push(questionsOfLV1[questionKey].correct);
+                        shuttleArray(options);
+                        for (let choiceIndex = 0; choiceIndex < 4; choiceIndex++){
+                            choices[symbols[choiceIndex]] = options[choiceIndex];
+                        }
+                        questionCardHTML = `
+                            <div id='question-card'>
+                                <h2>問題 ${questionNum}: ${questionKey}?</h2>
+                                <button class='choices'>A. ${choices['A']}</button>
+                                <button class='choices'>B. ${choices['B']}</button>
+                                <button class='choices'>C. ${choices['C']}</button>
+                                <button class='choices'>D. ${choices['D']}</button>
+                            </div>`;
+                        is_answered = false;
+                        break;
+                    case 2:
+                        if (!plot_passed){
+                            dialog.innerHTML = '';
+                            contentOfDialog = contentOfDialogOfLV2;
+                            lengthOfContentOfDialog = contentOfDialog.length;
+                            plot_passed = true;
+                            i = 0;
+                            typeDialog()
+                        }
+                        options = questionsOfLV2[questionKey].incorrect;
+                        options.push(questionsOfLV2[questionKey].correct);
+                        shuttleArray(options);
+                        for (let choiceIndex = 0; choiceIndex < 4; choiceIndex++){
+                            choices[symbols[choiceIndex]] = options[choiceIndex];
+                        }
+                        questionCardHTML = `
+                            <div id=\"question-card\">
+                                <h2>問題 ${questionNum}: ${questionKey}?</h2>
+                                <button class=\"choices\">A. ${choices['A']}</button>
+                                <button class=\"choices\">B. ${choices['B']}</button>
+                                <button class=\"choices\">C. ${choices['C']}</button>
+                                <button class=\"choices\">D. ${choices['D']}</button>
+                            </div>`;
+                        is_answered = false;
+                        break;
+                }
+                questionCard.innerHTML += questionCardHTML;
+            }
+            function showQuestion(){
+                questionNum += 1;
+                questionNumOfInstantLV = questionNum % 5;
+                switch(level){
+                    case 1:
+                        questionKey = questionKeysOfLV1.at(questionNumOfInstantLV - 1);
+                        break;
+                    case 2:
+                        questionKey = questionKeysOfLV2.at(questionNumOfInstantLV - 1);
+                        break;
+                    case 3:
+                        questionKey = questionKeysOfLV3.at(questionNumOfInstantLV - 1);
+                        break;
+                    case 4:
+                        questionKey = questionKeysOfLV4.at(questionNumOfInstantLV - 1);
+                        break;
+                    default:
+                        break;
+                }
+                generateQuestionCard(questionKey);
+                if (questionNumOfInstantLV == 0){
+                    level += 1;
+                    questionNumOfInstantLV = 0;
+                    plot_passed = false;
+                }
+            }
+            function clickingContinue(){
+                if (i == 0){
+                    typeDialog();
+                } else {//if(is_answered){
+                    dialog.innerHTML = '';
+                    showQuestion();
+                } /*else {
+                    alert('請先回答當前問題！');
+                }*/
+            }
+            // main
+            typeDialog();
+        </script>
+    </body>
+</html>
